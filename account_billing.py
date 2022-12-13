@@ -30,6 +30,7 @@ sample = client.get_cost_and_usage(
 )
 
 accounts = {}
+
 for i in range(len(sample["ResultsByTime"])):
     for j in range(len(sample["ResultsByTime"][i]["Groups"])):
         key = sample["ResultsByTime"][i]["Groups"][j]["Keys"][0]
@@ -38,6 +39,7 @@ for i in range(len(sample["ResultsByTime"])):
             accounts[key] = float(value)
         else:
             accounts[key] += float(value)
+            
 for i in range(len(sample["DimensionValueAttributes"])):
     print(sample["DimensionValueAttributes"][i]["Attributes"]["description"],
           " : ", accounts[sample["DimensionValueAttributes"][i]["Value"]])
