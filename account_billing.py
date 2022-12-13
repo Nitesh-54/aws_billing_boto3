@@ -2,17 +2,16 @@ import boto3
 from datetime import date
 from dateutil.relativedelta import relativedelta
 
-
-
 end_date = date.today()
 end_date = str(end_date)
-print(end_date)
 
-from_date = date.today().replace(day=1)
+updated_date = date.today().replace(day=1)
 
-start_date = from_date - relativedelta(months=3)
+start_date = updated_date - relativedelta(months=3)
 start_date = str(start_date)
+
 print(start_date)
+print(end_date)
 
 client = boto3.client('ce', region_name='us-east-1')
 sample = client.get_cost_and_usage(
@@ -40,4 +39,5 @@ for i in range(len(sample["ResultsByTime"])):
         else:
             accounts[key] += float(value)
 for i in range(len(sample["DimensionValueAttributes"])):
-    print(sample["DimensionValueAttributes"][i]["Attributes"]["description"]," : ",accounts[sample["DimensionValueAttributes"][i]["Value"]])
+    print(sample["DimensionValueAttributes"][i]["Attributes"]["description"],
+          " : ", accounts[sample["DimensionValueAttributes"][i]["Value"]])
