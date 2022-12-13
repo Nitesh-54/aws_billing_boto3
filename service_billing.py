@@ -24,7 +24,7 @@ cost_and_usage = client.get_cost_and_usage(
     GroupBy=[
         {
             "Type": "DIMENSION",
-            "Key": "REGION"
+            "Key": "SERVICE"
         }
     ]
 )
